@@ -408,9 +408,13 @@ public:
     // GraphicBuffers removed from this surface after a dequeueBuffer, detachNextBuffer or
     // attachBuffer call. This allows clients with their own buffer caches to free up buffers no
     // longer in use by this surface.
-    virtual int connect(int api, const sp<SurfaceListener>& listener,
-                        bool reportBufferRemoval = false);
-    virtual int detachNextBuffer(sp<GraphicBuffer>* outBuffer, sp<Fence>* outFence);
+    virtual int connect(
+            int api, const sp<IProducerListener>& listener,
+            bool reportBufferRemoval);
+    virtual int detachNextBuffer(sp<GraphicBuffer>* outBuffer,
+            sp<Fence>* outFence);
+    // MIUI ADD
+    virtual void releaseSlot(int slot);
     virtual int attachBuffer(ANativeWindowBuffer*);
 
     virtual void destroy();
